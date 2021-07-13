@@ -1,0 +1,10 @@
+ID:		HUBK00001
+Name:		Hung
+Lase name:	NguyenNgoc
+Address:	HoanKiem,HaNoi
+Phone num:	0982733242
+-----------------------------------
+ID		ProductName	Price			Promote		Qty	Money
+HUBK0001	NAME_001	1000			0		3	3000
+HUBK0039	NAME_039	1.02067e+06			0		3	3.06202e+06
+total										3.06502e+06
