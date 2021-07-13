@@ -3,7 +3,7 @@
 static int callback(void *data, int argc, char **argv, char **azColName)
 {
     int i;
-    fprintf(stderr, "%s: ", (const char *)data);
+    // fprintf(stderr, "%s: ", (const char *)data);
 
     for (i = 0; i < argc; i++)
     {
@@ -68,8 +68,8 @@ void sqlhandle::queryAlltable()
 }
 void sqlhandle::initializedataFROMCSV()
 {
-    fstream fb;
-    fb.open("../datacsv/data.csv", std::ios::in);
+    ifstream fb("../datacsv/data.csv", ios::in);
+    //fb.open("../datacsv/data.csv",ios::in);
     if (fb.fail())
     {
         cerr << "open file failed exit program " << __LINE__ << endl;

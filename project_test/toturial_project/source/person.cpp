@@ -27,7 +27,7 @@ void person::setDB()
     DB = this->getPersonDB();
     personinfor data;
     int ret = checkLeastID("person", "person", &data);
-    cout << ret << endl;
+    //cout << ret << endl;
     if (ret != 1)
     {
         setIDnum(0);
@@ -119,7 +119,6 @@ int person::checkLeastID(mystring database, mystring datatable, void *out)
         ret->cellNumber = phonenumber;
     }
 
-    cout << "ret->ID" << ret->ID << endl;
     if (strncmp(ret->ID.c_str(), "ID101", ret->ID.len() - 1) != 0)
         return 1;
     return -1;

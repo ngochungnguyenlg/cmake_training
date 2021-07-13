@@ -6,6 +6,12 @@
 #include <fstream>
 
 const int maxproduct=100;
+struct testdata
+{
+    mystring data;
+    int qty;
+};
+typedef testdata testdata;
 struct selectProduct_
 {
     mystring ID;
@@ -23,22 +29,30 @@ class customer : public person
     int numberofboughtProduct;
     personinfor customerInfor;
     mystring customerID;
-    selectProduct beBought[maxproduct];
+    selectProduct  *beBought= new selectProduct[maxproduct];
     bool hasbill=false;
 public:
     void byProduct();
+    void test();
     void byAProduct(mystring ID);
+    void byAProducttest(mystring ID, int qty);
     void makeBill();
     void printBill();
     void viewBill();
-    void deleteBuill();
+    void deleteBill();
     void deleteAproduct(mystring pID);
+    void modifyBeBought(selectProduct &productID, int qty);
     personinfor getCustomerInfor(mystring ID);
     void showCustomerInfor() const;
     void priceofAproduct(selectProduct &proname);
+    void keeponShopping();
     customer()
     {
         numberofboughtProduct=0;
     }
+    ~customer()
+    {
+        delete [] beBought;
+    };
 };
 #endif

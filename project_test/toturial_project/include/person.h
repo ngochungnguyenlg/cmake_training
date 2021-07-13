@@ -36,9 +36,10 @@ public:
     virtual int selectbyID(mystring database, mystring datatable,mystring ID, void *out);
     int showinformation(mystring database, mystring datatable,mystring ID);
     int getPos(personinfor data_);
-    static int setIDnum(int num)
+    static void setIDnum(int num)
     {
         person::IDnum=num;
+
     }
     static int getIDnum()
     {

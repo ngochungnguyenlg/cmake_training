@@ -1,18 +1,19 @@
-#include <saler.h>
-#include <mystring.h>
- #include <sqlhandle.h>
+
 #include <sale.h>
-#include <person.h>
-#include <customer.h>
+#include <sqlhandle.h>
+#include <stdio.h>
+#include <thread>
 int main()
 {
-    customer d;
-
-    // d.getCustomerInfor("HUBK00001");
-    d.byProduct();
-    // d.showCustomerInfor();
-    d.makeBill();
-    d.viewBill();
+    sale sell;
+    // sell.run();
+   /* sqlhandle data;
+    data.createtable();
+    data.initializedataFROMCSV();*/
+    thread t(&sale::run, &sell);
+    t.join();
+    // system("pause");
+    // remove("./tmp.txt");
     return 0;
-    
+
 }

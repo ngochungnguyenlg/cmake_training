@@ -3,6 +3,10 @@
 saler::saler()
 {
 }
+void saler::logout()
+{
+    this->isMember = 0;
+}
 int saler::createAccount()
 {
     adminInfor datainput;
@@ -26,19 +30,23 @@ int saler::createAccount()
             if(countInvalidPw==2)
             {
                 cout << "you have inputted too many times incorrect format of password "<<endl;
+                return -1;
                 break;
+                
             }
         }
         if(countInvalidPw==2) break;
         ret = db.inputAdminInfor(datainput);
+        
     } while (ret == 0);
+    return ret;
 }
 
 void saler::makeaccount()
 {
     cout << "Welcom to HHH shop as a new member of saler group" << endl;
-    cout << "to complete of this thing, plese input your information to make" << endl;
-    cout << "saler Account :" << endl;
+    cout << "to complete of this thing, plese input your information" << endl;
+    cout << "to make Account :" << endl;
     cout << "1st plese fill in form blow your information" << endl;
     this->inputInfor();
     int ret = this->createAccount();

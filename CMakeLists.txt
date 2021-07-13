@@ -31,9 +31,12 @@ file (GLOB SOURCES
 	project_test/commonlib/source/*.cpp
 	project_test/toturial_project/source/*.cpp
 	)
-
+add_definitions(
+	-D_LINUX_
+)
 add_compile_options(
 	-g
+	-std=c++11
 	)
 link_directories (
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/lib/
@@ -43,7 +46,7 @@ add_executable(
     ${SOURCES} #build tất cả các file .o
     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/main/main.cpp #build file *.o của main
 	)
-target_link_libraries(out sqlite3) #tiến hành link các file *.o với lib
+target_link_libraries(out sqlite3 pthread) #tiến hành link các file *.o với lib
 
 add_library(add_library_test SHARED ${SOURCES})
 

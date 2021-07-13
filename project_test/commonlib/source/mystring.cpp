@@ -13,25 +13,28 @@ istream &operator>>(istream &is,  mystring hstr2)
 mystring mystring::operator+(const mystring hstr2)
 {
     strcat(this->data, hstr2.data);
+    return *this;
 }
 mystring mystring::operator+(const char *hstr2)
 {
     strcat(this->data, hstr2);
+    return *this;
 }
 mystring mystring::operator+=(char hstr2)
 {
     this->data[this->len()-1]=hstr2;
     this->data[this->len()+1]='\0';
+    return *this;
 }
 bool mystring::operator==(const mystring hstr2)
 {
-    if (this->data == hstr2.data)
+    if (strcmp(this->data,hstr2.data)==0)
         return true;
     return false;
 }
 bool mystring::operator==(const char* hstr2)
 {
-    if (this->data == hstr2)
+    if (strcmp(this->data,hstr2)==0)
         return true;
     return false;
 }
