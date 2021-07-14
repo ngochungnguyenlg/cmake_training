@@ -197,10 +197,12 @@ void sale::dorequestfrom2nd()
     case 9:
 #if defined(_LINUX_)
         system("clear");
+        system("rm -rf * tmp.txt");
 #else
         system("cls");
+        remove("tmp.txt");
 #endif
-        cout << "Good bye :)" << endl;
+        cout << "Good bye :)" << endl;     
         break;
     }
 }
@@ -280,8 +282,12 @@ void sale::dorequest()
     case 8:
 #if defined(_LINUX_)
         system("clear");
+        system("rm -rf * tmp.txt");
+
 #else
         system("cls");
+        remove("tmp.txt");
+
 #endif
         cout <<"Good bye :)"<<endl;
         break;
