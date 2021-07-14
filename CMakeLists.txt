@@ -10,7 +10,6 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/toturial_project/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/toturial_project/source/
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/include/
-	
     )
 #file(
 #	GLOB SOURCES "project_test/commonlib/source/*.cpp"
@@ -36,21 +35,66 @@ add_definitions(
 )
 add_compile_options(
 	-g
+	-w
 	-std=c++11
 	)
 link_directories (
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/lib/
+	${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/include/
+	# ${CMAKE_CURRENT_SOURCE_DIR}/build/
 	)
+#==============================================================================
+#set example
+#https://hsf-training.github.io/hsf-training-cmake-webpage/05-variables/index.html
+#https://cmake.org/cmake/help/v3.0/command/set.html
+set(MY_VAR "hello world")
+message(STATUS ${MY_VAR})
+set(MY_VAR "hello world _______")
+message(STATUS ${MY_VAR})
+set(MY_VAR "hello world" CACHE STRING "Description")
+message(STATUS ${MY_VAR})
+
+#==============================================================================
+# build with static lib
+# set(PROJECT_LINK_LIBS libbuild_static_test.a)
+# add_executable(  
+# 	out 
+#     # ${SOURCES} #build tất cả các file .o
+#     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/main/main.cpp #build file *.o của main
+# 	)
+# target_link_libraries(out 
+# 	pthread 
+# 	${PROJECT_LINK_LIBS}
+# 	sqlite3
+# 	) #tiến hành link các file *.o với lib
+#===============================================================================
+#buil with share lib
+# set(PROJECT_LINK_LIBS build_share_test.so)
+# add_executable(  
+# 	out 
+#     # ${SOURCES} #build tất cả các file .o
+#     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/main/main.cpp #build file *.o của main
+# 	)
+# target_link_libraries(out 
+# 	pthread 
+# 	${PROJECT_LINK_LIBS}
+# 	sqlite3
+# 	) #tiến hành link các file *.o với lib
+#===============================================================================
+#build lib and install lib
 add_executable(  
 	out 
     ${SOURCES} #build tất cả các file .o
     ${CMAKE_CURRENT_SOURCE_DIR}/project_test/main/main.cpp #build file *.o của main
 	)
-target_link_libraries(out sqlite3 pthread) #tiến hành link các file *.o với lib
+target_link_libraries(out 
+	pthread 
+	sqlite3
+	) #tiến hành link các file *.o với lib
+add_library(build_share_test SHARED ${SOURCES})
+add_library(build_static_test STATIC ${SOURCES})
 
-add_library(add_library_test SHARED ${SOURCES})
-
-message(STATUS  "install lib test ...") 
-install(TARGETS add_library_test DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/lib)
+install(TARGETS build_share_test DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/lib)
+install(TARGETS build_static_test DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../../usr/lib)
 
 

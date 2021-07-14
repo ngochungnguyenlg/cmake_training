@@ -32,6 +32,7 @@ int sqlhandle::selectbyID(mystring database, mystring datatable,mystring ID, voi
     else
     {
         cout << "LOIX" << endl;
+        return -1;
     }
 
     while (sqlite3_step(stmt) != SQLITE_DONE)
@@ -63,12 +64,22 @@ void sqlhandle::queryAlltable()
     int exit = sqlite3_open("supermaket.db", &this->DB);
     string query_ = "SELECT * FROM GOODSTB1st;";
     row row;
-    sqlite3_exec(this->DB, query_.c_str(), callback, &row, NULL);
-    // cout <<":da in"<<row.ID<<endl;
+    exit=sqlite3_exec(this->DB, query_.c_str(), callback, &row, NULL);
+    int count=0;
+    while(exit!=SQLITE_OK){
+        createtable();
+        initializedataFROMCSV();
+        if(count==5) {
+            cout <<"cannot init data"<<endl;
+            break;
+            }
+        count +=1;
+        exit=sqlite3_exec(this->DB, query_.c_str(), callback, &row, NULL);
+    }
 }
 void sqlhandle::initializedataFROMCSV()
 {
-    ifstream fb("../datacsv/data.csv", ios::in);
+    ifstream fb("../project_test/datacsv/data.csv", ios::in);
     //fb.open("../datacsv/data.csv",ios::in);
     if (fb.fail())
     {
@@ -118,7 +129,7 @@ void sqlhandle::initializedataFROMCSV()
         {
             sql += includepos + valuetmp + " ";
             trytoin = includepos + valuetmp;
-            sqlite3_exec(this->DB, query_.c_str(), callback, NULL, NULL);
+            // sqlite3_exec(this->DB, query_.c_str(), callback, NULL, NULL);
             char *messaggeError;
             exit = sqlite3_exec(this->DB, trytoin.c_str(), NULL, NULL, &messaggeError);
             if (exit != SQLITE_OK)
